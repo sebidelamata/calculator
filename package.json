@@ -1,0 +1,22 @@
+{
+  "name": "calculator",
+  "version": "1.0.0",
+  "description": "calculator functions",
+  "main": "calculator.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebidelamata/calculator.git"
+  },
+  "author": "Sebi de la Mata",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sebidelamata/calculator/issues"
+  },
+  "homepage": "https://github.com/sebidelamata/calculator#readme",
+  "devDependencies": {
+    "jest": "^29.3.1"
+  }
+}
