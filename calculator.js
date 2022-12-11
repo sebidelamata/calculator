@@ -1,3 +1,6 @@
+let display = document.querySelector(".display-text");
+let buttons = document.querySelectorAll(".buttons");
+
 function numTest(a,b){
     if(typeof(a) != "number" || typeof(b) != "number"){
         throw new TypeError();
@@ -28,9 +31,25 @@ function division(a,b){
     return quotient;
 }
 
-module.exports = {
-    addition,
-    subtraction,
-    multiplication,
-    division
-  };
+function operate(a,b, FUN){
+    let output = FUN(a,b);
+    return output;
+}
+
+function populateDisplay(input){
+    display.textContent = input;
+}
+
+populateDisplay("test");
+
+function buttonClick{
+    
+}
+
+// module.exports = {
+//     addition,
+//     subtraction,
+//     multiplication,
+//     division,
+//     operate
+//   };

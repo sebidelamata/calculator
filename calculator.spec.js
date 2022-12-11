@@ -35,3 +35,12 @@ describe('division', () => {
     expect(() => { calculator.division(4, "oopsies"); }).toThrow(TypeError);
   });
 });
+
+describe('operate', () => {
+  test('two nums works', () => {
+    expect(calculator.operate(6,1, calculator.addition)).toBe(7);
+  });
+  test('rejects non-string args', () => {
+    expect(() => { calculator.operate(4, "oopsies", calculator.subtraction); }).toThrow(TypeError);
+  });
+});
