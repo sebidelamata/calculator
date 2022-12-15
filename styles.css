@@ -45,6 +45,7 @@
     display: flex;
     font-size: 28px;
     font-weight: 700;
+    overflow-wrap: break-word;
 }
 
 .buttons-container{
@@ -66,7 +67,8 @@
     gap: 4px;
 }
 
-.buttons{
+.buttons,
+.operator-button{
     background-color: gray;
     padding: 20px;
     margin: 3px;
@@ -77,3 +79,4 @@
     font-size: 20px;
 
 }
+

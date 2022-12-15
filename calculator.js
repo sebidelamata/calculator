@@ -1,5 +1,6 @@
 let display = document.querySelector(".display-text");
 let buttons = document.querySelectorAll(".buttons");
+let divisionSymbol = document.querySelector("#divisionSymbol");
 
 function numTest(a,b){
     if(typeof(a) != "number" || typeof(b) != "number"){
@@ -40,11 +41,22 @@ function populateDisplay(input){
     display.textContent = input;
 }
 
-populateDisplay("test");
+// initial display value
+let displayString = ""
+// 
 
-function buttonClick{
-    
+function inputDisplay(input){
+    displayString += input.target.id;
+    populateDisplay(displayString);
+    console.log(input.target.id);
 }
+console.log(buttons);
+
+buttons.forEach(
+    function(button){
+        button.addEventListener("click", inputDisplay);
+    }
+)
 
 // module.exports = {
 //     addition,
