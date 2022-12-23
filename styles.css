@@ -68,7 +68,8 @@
 }
 
 .buttons,
-.operator-button{
+.operator-button,
+.equals{
     background-color: gray;
     padding: 20px;
     margin: 3px;
