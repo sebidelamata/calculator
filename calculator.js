@@ -3,6 +3,9 @@ let buttons = document.querySelectorAll(".buttons");
 let divisionSymbol = document.querySelector("#divisionSymbol");
 let operatorButtons = document.querySelectorAll(".operator-button");
 let equals = document.querySelector(".equals");
+let clearButton = document.querySelector("#clear");
+let backButton = document.querySelector("#back");
+let isResult = false;
 
 // array to hold all of our numbers
 let numberArray = [];
@@ -53,6 +56,12 @@ let displayString = ""
 // 
 
 function inputDisplay(input){
+    // starts a new string if the last action was equals
+    if(isResult == true){
+        displayString = "";
+        isResult == false;
+    }
+    // add pressed button to display string and populate
     displayString += input.target.id;
     populateDisplay(displayString);
 }
@@ -68,11 +77,17 @@ buttons.forEach(
 // this function determines what happens if you click an operator button
 function operatorActions(){
     
-    numberArray.push(displayString);
+    if(isResult == false){
+        numberArray.push(displayString);
+        isResult == false;
+    }
     displayString = "";
     operatorVar = this.id;
     console.log(numberArray);
-    console.log(operatorVar);
+    if(numberArray.length == 2){
+        calculate();
+    }
+
 
 }
 
@@ -86,6 +101,7 @@ operatorButtons.forEach(
 function calculate(){
 
     numberArray.push(displayString);
+    isResult = true;
 
 
     switch(operatorVar) {
@@ -98,10 +114,10 @@ function calculate(){
                 addition
             );
 
-            console.log(output);
             displayString = String(output);
             populateDisplay(displayString);
-            numberArray[0] = output;
+            numberArray[0] = String(output);
+            numberArray.length  = 1;
             break;
 
             case "minus":
@@ -111,10 +127,10 @@ function calculate(){
                     subtraction
                 );
     
-                console.log(output);
                 displayString = String(output);
                 populateDisplay(displayString);
-                numberArray[0] = output;
+                numberArray[0] = String(output);
+                numberArray.length  = 1;
                 break;
 
             case "times":
@@ -124,30 +140,52 @@ function calculate(){
                         multiplication
                     );
         
+                    displayString = String(output);
+                    populateDisplay(displayString);
+                    numberArray[0] = String(output);
+                    numberArray.length  = 1;
+                    break;    
+
+            case "divisionSymbol":
+                output = operate(
+                    Number(numberArray[0]),
+                    Number(numberArray[1]),
+                        division
+                    );
+            
                     console.log(output);
                     displayString = String(output);
                     populateDisplay(displayString);
-                    numberArray[0] = output;
-                    break;    
-
-                    case "divisionSymbol":
-                        output = operate(
-                            Number(numberArray[0]),
-                            Number(numberArray[1]),
-                            division
-                        );
-            
-                        console.log(output);
-                        displayString = String(output);
-                        populateDisplay(displayString);
-                        numberArray[0] = output;
-                        break;
+                    numberArray[0] = String(output);
+                    numberArray.length  = 1;
+                    break;
 
     }
 
 }
 
+
+// listen to equals button
 equals.addEventListener("click", calculate);
+
+// create clear
+function clear(){
+    displayString = "";
+    populateDisplay(displayString);
+    numberArray = [];
+}
+
+// listen to clear button
+clearButton.addEventListener("click", clear);
+
+// create back
+function back(){
+    displayString = displayString.substring(0, displayString.length - 1);
+    populateDisplay(displayString);
+}
+
+// listen to back button
+backButton.addEventListener("click", back);
 
 // module.exports = {
 //     addition,

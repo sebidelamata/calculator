@@ -69,7 +69,9 @@
 
 .buttons,
 .operator-button,
-.equals{
+.equals,
+.back,
+.clear{
     background-color: gray;
     padding: 20px;
     margin: 3px;
