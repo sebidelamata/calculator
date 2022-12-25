@@ -10,7 +10,7 @@ let isResult = false;
 // array to hold all of our numbers
 let numberArray = [];
 //  hold our operator string
-let operatorVar;
+let operatorVar = "";
 
 function numTest(a,b){
     if(typeof(a) != "number" || typeof(b) != "number"){
@@ -62,6 +62,9 @@ function inputDisplay(input){
         isResult == false;
     }
     // add pressed button to display string and populate
+    if(displayString.includes(".") == true && input.target.id == "."){
+        return;
+    }
     displayString += input.target.id;
     populateDisplay(displayString);
 }
@@ -76,17 +79,29 @@ buttons.forEach(
 
 // this function determines what happens if you click an operator button
 function operatorActions(){
-    
+
+    if(operatorVar != ""){
+        calculate();
+        operatorVar = "";
+    }
+
+    // if this is not a result push
+    // to end of  numberArray
+    // if it is a result the number
+    // was already pushed during calculate
     if(isResult == false){
         numberArray.push(displayString);
     }
+    // reset our display string to accept new input
     displayString = "";
+    // capture the operator symbol just clicked
     operatorVar = this.id;
     console.log(numberArray);
+    // if the number array has two elements we calculate
     if(numberArray.length == 2){
         calculate();
+        operatorVar = "";
     }
-
 
 }
 
@@ -146,18 +161,25 @@ function calculate(){
                     break;    
 
             case "divisionSymbol":
-                output = operate(
-                    Number(numberArray[0]),
-                    Number(numberArray[1]),
-                        division
-                    );
-            
+                if(numberArray[1] != 0){
+                    output = operate(
+                        Number(numberArray[0]),
+                        Number(numberArray[1]),
+                            division
+                        );
+                
                     console.log(output);
                     displayString = String(output);
                     populateDisplay(displayString);
                     numberArray[0] = String(output);
                     numberArray.pop();
                     break;
+                } else {
+                    displayString = "You can't divide by zero you dummy.";
+                    populateDisplay(displayString);
+                    
+                    setTimeout(clearEvent, 3000);
+                }
 
     }
 
@@ -168,7 +190,7 @@ function calculate(){
 equals.addEventListener("click", calculate);
 
 // create clear to reset everything
-function clear(){
+function clearEvent(){
     displayString = "";
     populateDisplay(displayString);
     numberArray = [];
@@ -177,7 +199,8 @@ function clear(){
 }
 
 // listen to clear button
-clearButton.addEventListener("click", clear);
+clearButton.addEventListener("click", clearEvent);
+
 
 // create back
 function back(){
