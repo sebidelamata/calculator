@@ -79,7 +79,6 @@ function operatorActions(){
     
     if(isResult == false){
         numberArray.push(displayString);
-        isResult == false;
     }
     displayString = "";
     operatorVar = this.id;
@@ -117,7 +116,7 @@ function calculate(){
             displayString = String(output);
             populateDisplay(displayString);
             numberArray[0] = String(output);
-            numberArray.length  = 1;
+            numberArray.pop();
             break;
 
             case "minus":
@@ -130,7 +129,7 @@ function calculate(){
                 displayString = String(output);
                 populateDisplay(displayString);
                 numberArray[0] = String(output);
-                numberArray.length  = 1;
+                numberArray.pop();
                 break;
 
             case "times":
@@ -143,7 +142,7 @@ function calculate(){
                     displayString = String(output);
                     populateDisplay(displayString);
                     numberArray[0] = String(output);
-                    numberArray.length  = 1;
+                    numberArray.pop();
                     break;    
 
             case "divisionSymbol":
@@ -157,7 +156,7 @@ function calculate(){
                     displayString = String(output);
                     populateDisplay(displayString);
                     numberArray[0] = String(output);
-                    numberArray.length  = 1;
+                    numberArray.pop();
                     break;
 
     }
@@ -168,11 +167,13 @@ function calculate(){
 // listen to equals button
 equals.addEventListener("click", calculate);
 
-// create clear
+// create clear to reset everything
 function clear(){
     displayString = "";
     populateDisplay(displayString);
     numberArray = [];
+    isResult = false;
+    operatorVar = undefined;
 }
 
 // listen to clear button
